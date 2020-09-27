@@ -201,7 +201,7 @@ namespace Oddworm.EditorFramework
         {
             EditorPrefs.SetString(k_AssemblyReloadFinished, DateTime.Now.Ticks.ToString());
 
-            if (showCompilationAndAssemblyReload)
+            if (showCompilationAndAssemblyReload && !EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 EditorApplication.delayCall += delegate ()
                 {
