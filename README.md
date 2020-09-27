@@ -6,7 +6,7 @@ The Mini Editor Iteration Profiler shows the duration the Unity editor needs to:
 * Enter Play Mode
 * Exit Play Mode
 
-These timings are shown in the Scene and GameView, using Unity's EditorWindow [notifications API](https://docs.unity3d.com/ScriptReference/EditorWindow.ShowNotification.html). and presented in the simplest way possible.
+These timings are shown in the Scene and GameView, using Unity's EditorWindow [notifications API](https://docs.unity3d.com/ScriptReference/EditorWindow.ShowNotification.html) and are presented in the simplest way possible.
 
 Easy access to these timings allows you to spot whenever one of those timings worsened, which should be a signal to check what you recently added to the project, that would explain the drop in performance.
 
