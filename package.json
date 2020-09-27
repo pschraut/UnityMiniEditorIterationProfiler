@@ -1,0 +1,23 @@
+{
+  "name": "com.oddworm.minieditoriterationprofiler",
+  "version": "1.0.0",
+  "displayName": "Mini Editor Iteration Profiler",
+  "description": "The Mini Editor Iteration Profiler displays the duration Unity needed to compile assemblies, to perform a domain reload, as well as enter and exit play mode durations. The timings are presented in the Scene and GameView via Unitys notifications API.\n\nHaving easy access to these timings allows you to spot whenever one of those timings made a significant jump, which should be an indicator to check what you recently added to the project which might have affected the enter play mode performance in a bad way.",
+  "documentationUrl": "https://github.com/pschraut/UnityMiniEditorIterationProfiler",
+  "unity": "2019.3",
+  "dependencies": {
+  },
+  "keywords": [
+    "profiler",
+    "profiling",
+	"editor"
+  ],
+  "author": {
+    "name": "Peter Schraut",
+    "url": "http://console-dev.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pschraut/UnityMiniEditorIterationProfiler.git"
+  }  
+}
