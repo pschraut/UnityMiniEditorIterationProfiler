@@ -218,6 +218,7 @@ namespace Oddworm.EditorFramework
         static void ShowNotification(string text)
         {
             var message = new GUIContent(text);
+            var showSecs = 1.0f; // how many seconds to show the notification
 
             UnityEngine.Profiling.Profiler.BeginSample("MiniEditorIterationProfiler.ShowSceneViewNotification");
             foreach (var sceneView in SceneView.sceneViews)
@@ -226,7 +227,7 @@ namespace Oddworm.EditorFramework
                 if (window != null)
                 {
                     window.RemoveNotification();
-                    window.ShowNotification(message);
+                    window.ShowNotification(message, showSecs);
                 }
             }
             UnityEngine.Profiling.Profiler.EndSample();
@@ -238,7 +239,7 @@ namespace Oddworm.EditorFramework
                 if (window != null)
                 {
                     window.RemoveNotification();
-                    window.ShowNotification(message);
+                    window.ShowNotification(message, showSecs);
                 }
             }
             UnityEngine.Profiling.Profiler.EndSample();
