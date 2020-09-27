@@ -1,17 +1,21 @@
 # Mini Editor Iteration Profiler for Unity
 
-The Mini Editor Iteration Profiler shows the duration Unity needs to:
+The Mini Editor Iteration Profiler shows the duration the Unity editor needs to:
 * Compile assemblies
 * Perform an assembly reload
 * Enter Play Mode
 * Exit Play Mode
 
-The timings are shown in the Scene and GameView, using Unity's EditorWindow [notifications API](https://docs.unity3d.com/ScriptReference/EditorWindow.ShowNotification.html).
+These timings are shown in the Scene and GameView, using Unity's EditorWindow [notifications API](https://docs.unity3d.com/ScriptReference/EditorWindow.ShowNotification.html). and presented in the simplest way possible.
 
-Easy access to these timings allows you to spot whenever one of those timings worsened, 
-which should be a signal to check what you recently added to the project,  that would explain the drop in performance.
+Easy access to these timings allows you to spot whenever one of those timings worsened, which should be a signal to check what you recently added to the project, that would explain the drop in performance.
 
-I use this tool for a long time. It allowed me to witness how Unity upgrades affect the performance of my editor iteration time for example. Use Unity's Preferences window to configure what timings to show.
+I use this tool for a long time, it proved quite useful.
+It allowed me to witness how Unity upgrades affect performance of my editor iteration time and to become immediately 
+aware if my code changes added another second to enter Play Mode for example. Especially enter Play Mode can worsen significantly over 
+time if you don't have an eye on it. The Mini Editor Iteration Profiler shows you the duration every time you enter Play Mode, which makes it difficult to let things go unnoticed.
+
+Use Unity's Preferences window to configure what timings to show.
 
 
 [![](Documentation~/images/video.png)](https://youtu.be/s26H8AtMzUU "")
