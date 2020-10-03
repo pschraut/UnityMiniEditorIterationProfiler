@@ -141,7 +141,10 @@ namespace Oddworm.EditorFramework
         static void OnPlayModeStateChanged(PlayModeStateChange value)
         {
             if (value == PlayModeStateChange.ExitingEditMode)
+            {
                 EditorPrefs.SetString(k_EnterPlayModeStarted, DateTime.Now.Ticks.ToString());
+                EditorPrefs.DeleteKey(k_EnterPlayModeFinished);
+            }
 
             if (value == PlayModeStateChange.EnteredPlayMode)
             {
@@ -151,14 +154,20 @@ namespace Oddworm.EditorFramework
                 {
                     EditorApplication.delayCall += delegate ()
                     {
-                        ShowNotification(string.Format("Enter PlayMode {0:F2}s", lastEnterPlayModeDuration.TotalSeconds));
+                        ShowNotification(string.Format("Enter Play Mode {0:F2}s", lastEnterPlayModeDuration.TotalSeconds));
+
+                        EditorPrefs.DeleteKey(k_EnterPlayModeStarted);
+                        EditorPrefs.DeleteKey(k_EnterPlayModeFinished);
                     };
                 }
             }
 
 
             if (value == PlayModeStateChange.ExitingPlayMode)
+            {
                 EditorPrefs.SetString(k_EnterEditModeStarted, DateTime.Now.Ticks.ToString());
+                EditorPrefs.DeleteKey(k_EnterEditModeFinished);
+            }
 
             if (value == PlayModeStateChange.EnteredEditMode)
             {
@@ -168,7 +177,10 @@ namespace Oddworm.EditorFramework
                 {
                     EditorApplication.delayCall += delegate ()
                     {
-                        ShowNotification(string.Format("Exit PlayMode {0:F2}s", lastEnterEditModeDuration.TotalSeconds));
+                        ShowNotification(string.Format("Exit Play Mode {0:F2}s", lastEnterEditModeDuration.TotalSeconds));
+
+                        EditorPrefs.DeleteKey(k_EnterEditModeStarted);
+                        EditorPrefs.DeleteKey(k_EnterEditModeFinished);
                     };
                 }
             }
@@ -181,6 +193,7 @@ namespace Oddworm.EditorFramework
 
             s_CompileObj = obj;
             EditorPrefs.SetString(k_CompilationStarted, DateTime.Now.Ticks.ToString());
+            EditorPrefs.DeleteKey(k_CompilationFinished);
         }
 
         static void OnCompilationFinished(object obj)
@@ -195,24 +208,44 @@ namespace Oddworm.EditorFramework
         static void OnBeforeAssemblyReload()
         {
             EditorPrefs.SetString(k_AssemblyReloadStarted, DateTime.Now.Ticks.ToString());
+            EditorPrefs.DeleteKey(k_AssemblyReloadFinished);
         }
 
         static void OnAfterAssemblyReload()
         {
+            // Enter Play Mode can also cause an assembly reload. If we don't clear the timings,
+            // it would displays an incorrect value when we restart Unity.
+            // Enter Playmode > Exit Playmode > Close Unity > Open Unity = Wrong reload duration
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                EditorPrefs.DeleteKey(k_AssemblyReloadStarted);
+                EditorPrefs.DeleteKey(k_AssemblyReloadFinished);
+                return;
+            }
+
+            if (!showCompilationAndAssemblyReload)
+                return;
+
             EditorPrefs.SetString(k_AssemblyReloadFinished, DateTime.Now.Ticks.ToString());
 
-            if (showCompilationAndAssemblyReload && !EditorApplication.isPlayingOrWillChangePlaymode)
+            EditorApplication.delayCall += delegate ()
             {
-                EditorApplication.delayCall += delegate ()
+                var total = lastCompilationDuration.TotalSeconds + lastAssemblyReloadDuration.TotalSeconds;
+                if (total > 0)
                 {
                     var text = string.Format("Compile {0:F2}s + Reload {1:F2}s = {2:F2}s",
                         lastCompilationDuration.TotalSeconds,
                         lastAssemblyReloadDuration.TotalSeconds,
-                        lastCompilationDuration.TotalSeconds + lastAssemblyReloadDuration.TotalSeconds);
+                        total);
 
                     ShowNotification(text);
-                };
-            }
+                }
+
+                EditorPrefs.DeleteKey(k_CompilationStarted);
+                EditorPrefs.DeleteKey(k_CompilationFinished);
+                EditorPrefs.DeleteKey(k_AssemblyReloadStarted);
+                EditorPrefs.DeleteKey(k_AssemblyReloadFinished);
+            };
         }
 
         static void ShowNotification(string text)
