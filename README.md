@@ -34,5 +34,6 @@ In Unity's Package Manager, choose "Add package from git URL" and insert one of 
 
 | Version  |     Link      |
 |----------|---------------|
+| 1.1.0 | https://github.com/pschraut/UnityMiniEditorIterationProfiler.git#1.1.0 |
 | 1.0.0 | https://github.com/pschraut/UnityMiniEditorIterationProfiler.git#1.0.0 |
 
