@@ -23,6 +23,7 @@ namespace Oddworm.EditorFramework
                     MiniEditorIterationProfiler.showCompilationAndAssemblyReload = EditorGUILayout.ToggleLeft("Show Compilation and Assembly Reload", MiniEditorIterationProfiler.showCompilationAndAssemblyReload);
                     MiniEditorIterationProfiler.showEnterPlayMode = EditorGUILayout.ToggleLeft("Show Enter Play Mode", MiniEditorIterationProfiler.showEnterPlayMode);
                     MiniEditorIterationProfiler.showExitPlayMode = EditorGUILayout.ToggleLeft("Show Exit Play Mode", MiniEditorIterationProfiler.showExitPlayMode);
+                    MiniEditorIterationProfiler.displayTime = EditorGUILayout.FloatField("Message Display Time (seconds)", MiniEditorIterationProfiler.displayTime);
                     EditorGUI.indentLevel--;
                 },
             };
