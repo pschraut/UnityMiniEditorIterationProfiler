@@ -44,10 +44,10 @@ namespace Oddworm.EditorFramework
         /// </summary>
         public static float displayTime
         {
-            get { return EditorPrefs.GetFloat(k_DisplayTime, 4f); }
+            get { return EditorPrefs.GetFloat(k_DisplayTime, 1); }
             set { EditorPrefs.SetFloat(k_DisplayTime, value); }
         }
-        
+
         /// <summary>
         /// Gets the duration of the last assembly reload.
         /// </summary>
