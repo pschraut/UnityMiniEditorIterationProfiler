@@ -32,8 +32,11 @@ In Unity's Package Manager, choose "Add package from git URL" and insert one of 
 
 ## Package URL's
 
+I recommend to right-click the URL below and choose "Copy Link" rather than selecting the text and copying it, because sometimes it copies a space at the end and the Unity Package Manager can't handle it and spits out an error when you try to add the package.
+
 | Version  |     Link      |
 |----------|---------------|
+| 1.2.0 | https://github.com/pschraut/UnityMiniEditorIterationProfiler.git#1.2.0 |
 | 1.1.0 | https://github.com/pschraut/UnityMiniEditorIterationProfiler.git#1.1.0 |
 | 1.0.0 | https://github.com/pschraut/UnityMiniEditorIterationProfiler.git#1.0.0 |
 
