@@ -40,6 +40,15 @@ namespace Oddworm.EditorFramework
         }
 
         /// <summary>
+        /// Amount of time to display the message on screen for.
+        /// </summary>
+        public static float displayTime
+        {
+            get { return EditorPrefs.GetFloat(k_DisplayTime, 4f); }
+            set { EditorPrefs.SetFloat(k_DisplayTime, value); }
+        }
+        
+        /// <summary>
         /// Gets the duration of the last assembly reload.
         /// </summary>
         static TimeSpan lastAssemblyReloadDuration
@@ -125,6 +134,7 @@ namespace Oddworm.EditorFramework
         const string k_EnterEditModeStarted = k_Prefix + "EnterEditModeStarted";
         const string k_EnterEditModeFinished = k_Prefix + "EnterEditModeFinished";
         const string k_ShowEnterEditMode = k_Prefix + "ShowEnterEditMode";
+        const string k_DisplayTime = k_Prefix + "DisplayTime";
 
         [InitializeOnLoadMethod]
         static void RegisterCallbacks()
@@ -251,7 +261,7 @@ namespace Oddworm.EditorFramework
         static void ShowNotification(string text)
         {
             var message = new GUIContent(text);
-            var showSecs = 1.0f; // how many seconds to show the notification
+            var showSecs = MiniEditorIterationProfiler.displayTime; // how many seconds to show the notification
 
             UnityEngine.Profiling.Profiler.BeginSample("MiniEditorIterationProfiler.ShowSceneViewNotification");
             foreach (var sceneView in SceneView.sceneViews)
